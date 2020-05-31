@@ -32,6 +32,7 @@ The project consist of the following files:
 
 The *important* file is `charts.js`. The other files are for documentation and help.
 
+The `example.html` file is published as [Charts examples](http://anders.nemonisimors.com/projects/charts/example.html), so you can have a look at what it may look like.
 
 
 ## Installing
@@ -157,7 +158,7 @@ const dices = {
 
 ## Examples
 
-You can see more examples in the `example.html` file.
+You can see more examples in the `example.html` and `example.js` files. You can see the result at [Chart examples](http://anders.nemonisimors.com/projects/charts/example.html).
 
 
 
