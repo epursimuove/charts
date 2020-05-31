@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proof of concept for chart functionality</title>
+
+    <!-- The Chart.js from https://www.chartjs.org. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+    <script type="text/javascript"
+            src="js/charts.js"></script>
+
+    <script type="text/javascript"
+            src="js/data.js"></script>
+
+    <script type="text/javascript"
+            src="js/structuredData.js"></script>
+
+    <script type="text/javascript"
+            src="js/example.js"></script>
+
+    <style>
+        body {
+            font-family: 'Arial', serif;
+        }
+
+        code {
+            font-family: 'Menlo', monospace;
+            color: saddlebrown;
+        }
+
+        div.pies {
+            display: flex;
+        }
+
+        div.pies div {
+            flex: 1;
+        }
+
+    </style>
+
+</head>
+
+
+
+
+<body>
+
+<h1>Chart examples</h1>
+
+<p>
+    A collection of various examples of how easily <em>Charts</em> can be used to visualize the data you have.
+</p>
+
+<p>
+    The raw example data is found in <code>data.js</code>, which is then restructured in <code>structuredData.js</code>, so it can be used in the charts. The <code>example.js</code> contains the code that configures the charts from this structured data.
+</p>
+
+<p>
+    The simplest data model is probably the <code>structuredData.dices</code> and the most complex (and interesting) is probably the <code>structuredData.orienteering</code>.
+</p>
+
+<p>
+    When using legends in the charts, you can toggle specific data by clicking on each legend value.
+</p>
+
+
+<h2>Dices</h2>
+
+<canvas id="dicesChart" width="1600" height="200"></canvas>
+
+
+<h2>The planets in our solar system</h2>
+
+<canvas id="planetsDiameterChart" width="1600" height="300"></canvas>
+
+<canvas id="planetsDistanceChart" width="1600" height="300"></canvas>
+
+
+<h2>Some countries in Europe</h2>
+
+<canvas id="countriesAreaChart" width="1600" height="600"></canvas>
+
+<canvas id="countriesPopulationChart" width="1600" height="600"></canvas>
+
+<canvas id="countriesBubbleChart" width="1600" height="800"></canvas>
+
+
+<h2>Continents</h2>
+
+<canvas id="continentsHighestPointChart" width="1600" height="600"></canvas>
+
+
+<h2>Volleyball</h2>
+
+<canvas id="volleyballStackedChart" width="1600" height="600"></canvas>
+
+<!--<canvas id="volleyballBubbleChart" width="1600" height="600"></canvas>-->
+
+
+<h2>Orienteering</h2>
+
+<p>
+    For each reload of the page the data is randomly selected from three different sets.
+</p>
+
+<canvas id="orienteeringRelativeLegTimesChart" width="1600" height="600"></canvas>
+
+<canvas id="orienteeringRelativeSplitTimesChart" width="1600" height="800"></canvas>
+
+<canvas id="orienteeringStackedChart" width="1600" height="400"></canvas>
+
+<canvas id="orienteeringGroupedChart" width="1600" height="400"></canvas>
+
+
+<h2>Misc</h2>
+
+<div class="pies">
+    <div>
+        <canvas id="dices2Chart" width="400" height="400"></canvas>
+    </div>
+
+    <div>
+        <canvas id="countriesPopulation2Chart" width="400" height="400"></canvas>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>
