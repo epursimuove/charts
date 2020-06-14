@@ -138,7 +138,7 @@ const myCharts = (() => {
         });
 
         nnmCharts.lineChart({
-            canvasId: 'orienteeringRelativeSplitTimesChart',
+            canvasId: 'orienteeringRelativeSplitTimesByControlChart',
             title: `Relative split times for ${orienteering.numberOf} best athletes in ${orienteering.class} and ${orienteering.controls.length - 2} controls (total winning time ${orienteering.totalWinningTime}). ${orienteering.event}, ${orienteering.localDate}`,
             xAxesLabel: `${orienteering.event}, ${orienteering.class}`,
             yAxesLabel: 'Relative split time (seconds)',
@@ -147,6 +147,21 @@ const myCharts = (() => {
                 return {
                     label: name,
                     data: orienteering.relativeSplitTimes[index]
+                };
+            })
+        });
+
+        nnmCharts.timeChart({
+            canvasId: 'orienteeringRelativeSplitTimesByTimeChart',
+            title: `Split times for ${orienteering.numberOf} best athletes in ${orienteering.class} and ${orienteering.controls.length - 2} controls (total winning time ${orienteering.totalWinningTime}). ${orienteering.event}, ${orienteering.localDate}`,
+            xAxesLabel: `Split time`,
+            // xAxesLabel: `${orienteering.event}, ${orienteering.class}`,
+            // yAxesLabel: 'Control',
+            yLabels: orienteering.controls,
+            datasets: orienteering.names.map((name, index) => {
+                return {
+                    label: name,
+                    data: orienteering.splitTimes[index]
                 };
             })
         });

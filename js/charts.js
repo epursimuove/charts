@@ -10,6 +10,8 @@ const nnmCharts = (() => {
 
     console.log('Starting up charts functionality...');
 
+    const version = '1.0.0';
+
     Chart.defaults.global.elements.line.fill = false;
 
     const defaultColors = [
@@ -57,7 +59,7 @@ const nnmCharts = (() => {
     let numberOfCharts = 0;
 
     const createChart = (type, extra = {}) => (configuration) => {
-        const {canvasId, title, xAxesLabel, yAxesLabel, labels, datasets, colors} = configuration;
+        const {canvasId, title, xAxesLabel, yAxesLabel, labels, yLabels, datasets, colors} = configuration;
         const context = document.getElementById(canvasId).getContext('2d');
 
         if (datasets.length === 1) {
@@ -70,6 +72,10 @@ const nnmCharts = (() => {
             labels: labels,
             datasets: datasets
         };
+
+        if (extra.time) {
+            barChartData.yLabels = yLabels;
+        }
 
         const computed = {
             displayLegend: barChartData.datasets.length > 1 || ['line', 'pie', 'bubble'].includes(type),
@@ -109,6 +115,11 @@ const nnmCharts = (() => {
                     }
                 }]
             };
+
+            if (extra.time) {
+                options.scales.xAxes[0].type = 'time';
+                options.scales.yAxes[0].type = 'category';
+            }
         }
 
         // console.log('type', type);
@@ -122,15 +133,19 @@ const nnmCharts = (() => {
         });
 
         numberOfCharts++;
+
+        return chart;
     };
 
     console.log('Starting up charts functionality - DONE');
 
     return {
+        version,
         getNumberOfCharts: () => numberOfCharts,
         horizontalBarChart: createChart('horizontalBar'),
         verticalBarChart: createChart('bar'),
         lineChart: createChart('line'),
+        timeChart: createChart('line', {time: true}),
         pieChart: createChart('pie'),
         bubbleChart: createChart('bubble'),
         stackedVerticalBarChart: createChart('bar', {stacked: true}),

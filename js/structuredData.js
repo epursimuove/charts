@@ -4,6 +4,11 @@
 
 'use strict';
 
+// We depend on Luxon's date and time library, version 1.24.1 or above.
+// const luxon = require('luxon');
+const DateTime = luxon.DateTime;
+const Duration = luxon.Duration;
+
 const structuredData = (() => {
 
     console.log('Creating structured data sets...');
@@ -74,6 +79,15 @@ const structuredData = (() => {
 
     const createOrienteering = () => {
 
+        const toHMS = totalSeconds => {
+
+            const duration = Duration.fromObject({seconds: totalSeconds});
+
+            const formattedDuration = duration.toFormat('hh:mm:ss');
+
+            return formattedDuration;
+        }
+
         const minutesAndSecondsTotalSeconds = (mm_ss, force = false) => {
             if (force || mm_ss.startsWith('+')) {
                 const minutesAndSeconds = mm_ss.split('.');
@@ -82,6 +96,26 @@ const structuredData = (() => {
             else {
                 return 0;
             }
+        };
+
+        const hoursAndMinutesAndSecondsTotalSeconds = (hh_mm_ss) => {
+            // The formats are either "h:mm.ss" or "m.ss".
+
+            let hours = 0;
+            let mm_ss = null;
+
+            if (hh_mm_ss.includes(':')) {
+                const hoursAndMinutesSeconds = hh_mm_ss.split(':');
+
+                hours = Number.parseInt(hoursAndMinutesSeconds[0], 10);
+                mm_ss = hoursAndMinutesSeconds[1];
+            } else {
+                mm_ss = hh_mm_ss;
+            }
+
+            const totalSeconds = hours * 3600 + minutesAndSecondsTotalSeconds(mm_ss, true);
+
+            return totalSeconds;
         };
 
         const isMistake = (percentage) => (relativeLegTime, index) => {
@@ -93,8 +127,20 @@ const structuredData = (() => {
             return isMistake;
         };
 
+        const asTime = totalSeconds => DateTime.fromISO('2020-01-01T01:00:00').plus(Duration.fromObject({seconds: totalSeconds})).toJSDate();
+
         // Only use the ten best athletes.
         orienteeringData.results = orienteeringData.results.slice(0, 10);
+        // orienteeringData.results = orienteeringData.results.slice(0, 5).concat(orienteeringData.results.slice(45, 50));
+
+        const createControls = () => {
+            const controls = orienteeringData.results[0].relativeSplitTimes
+                .map((split, index) => 'Control ' + (index + 1));
+            controls.unshift('Start');
+            controls[controls.length - 1] = 'Finish'; // Rename last control to 'Finish'.
+            return controls;
+        };
+
 
         const orienteering = {
             event: orienteeringData.event,
@@ -104,12 +150,24 @@ const structuredData = (() => {
             totalWinningTime: orienteeringData.results[0].totalTime,
             names: orienteeringData.results.map(athlete => athlete.name),
 
-            controls: orienteeringData.results[0].relativeSplitTimes
-                .map((split, index) => 'Control ' + (index + 1)),
+            controls: createControls(),
 
-            // splitTimes: orienteeringData.results
-            //     .map(athlete => athlete.splitTimes
-            //         .map(splitTime => minutesAndSecondsTotalSeconds(splitTime))),
+            splitTimes: orienteeringData.results
+                .map(athlete => athlete.relativeSplitTimes
+                    .map((splitTime, control) => {
+
+                        const splitTimeInSecondsForAthlete =
+                            hoursAndMinutesAndSecondsTotalSeconds(orienteeringData.bestSplitTimes[control]) +
+                            minutesAndSecondsTotalSeconds(splitTime);
+
+                        const splitTimeStringForAthlete = toHMS(splitTimeInSecondsForAthlete);
+
+                        return {
+                            t: splitTimeStringForAthlete,
+                            y: control + 1 < athlete.relativeSplitTimes.length ? 'Control ' + (control + 1) : 'Finish'
+                            // y: (control + 1)
+                        }
+                    })),
 
             relativeLegTimes: orienteeringData.results
                 .map(athlete => athlete.relativeLegTimes
@@ -166,13 +224,9 @@ const structuredData = (() => {
         };
 
         // Add 'Start' times for every athlete.
-        orienteering.controls.unshift('Start');
-        // orienteering.splitTimes.forEach(athleteArray => athleteArray.unshift(0));
+        orienteering.splitTimes.forEach(athleteArray => athleteArray.unshift({t: toHMS(0), y: 'Start'}));
         orienteering.relativeLegTimes.forEach(athleteArray => athleteArray.unshift(0));
         orienteering.relativeSplitTimes.forEach(athleteArray => athleteArray.unshift(0));
-
-        // The last control is 'Finish'.
-        orienteering.controls[orienteering.controls.length - 1] = 'Finish';
 
         return orienteering;
     };
