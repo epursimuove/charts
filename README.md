@@ -70,6 +70,7 @@ The following types are implemented at the moment:
     - Grouped
   - Horizontal
 - Line
+    - Time
 - Pie
 - Bubble
 
@@ -154,6 +155,12 @@ const dices = {
 **title** - an optional title.
 
 **xAxesLabel** and **yAxesLabel** - enhancing descriptions for the axes.
+
+**yLabels** - used by time charts.
+
+**colors** - using your own colors, instead of the predefined.
+
+**fillViewport** - if true, the canvas used for the chart, will use the maximum of height and width of the current viewport, regardless if portrait or landscape mode.
 
 
 ## Examples
