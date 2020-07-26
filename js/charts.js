@@ -142,7 +142,7 @@ const nnmCharts = (() => {
         return chart;
     };
 
-    console.log('Starting up charts functionality - DONE');
+    console.log(`Starting up charts functionality - DONE (version ${version})`);
 
     return {
         version,
