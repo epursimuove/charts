@@ -160,7 +160,7 @@ const dices = {
 
 **colors** - using your own colors, instead of the predefined.
 
-**fillViewport** - if true, the canvas used for the chart, will use the maximum of height and width of the current viewport, regardless if portrait or landscape mode.
+**fillViewportFactor** - if `0 < fillViewportFactor ≤ 1`, the canvas used for the chart, will use the maximum width of the current viewport and the maximum height multiplied with `fillViewportFactor`, regardless if portrait or landscape mode.
 
 
 ## Examples

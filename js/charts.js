@@ -10,7 +10,7 @@ const nnmCharts = (() => {
 
     console.log('Starting up charts functionality...');
 
-    const version = '1.1.0';
+    const version = '1.2.0';
 
     Chart.defaults.global.elements.line.fill = false;
 
@@ -59,12 +59,12 @@ const nnmCharts = (() => {
     let numberOfCharts = 0;
 
     const createChart = (type, extra = {}) => (configuration) => {
-        const {canvasId, title, xAxesLabel, yAxesLabel, labels, yLabels, datasets, colors, fillViewport} = configuration;
+        const {canvasId, title, xAxesLabel, yAxesLabel, labels, yLabels, datasets, colors, fillViewportFactor} = configuration;
         const context = document.getElementById(canvasId).getContext('2d');
 
-        if (fillViewport) {
+        if (fillViewportFactor > 0 && fillViewportFactor <= 1) {
             context.canvas.width = window.innerWidth;
-            context.canvas.height = window.innerHeight * 0.95;
+            context.canvas.height = window.innerHeight * fillViewportFactor;
         }
 
         if (datasets.length === 1) {

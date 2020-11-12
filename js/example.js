@@ -36,6 +36,7 @@ const myCharts = (() => {
         });
 
         nnmCharts.horizontalBarChart({
+            fillViewportFactor: 0.9,
             canvasId: 'planetsDistanceChart',
             title: `Distance from the Sun for ${planets.numberOf} planets`,
             xAxesLabel: 'Distance from the Sun (million km)',
