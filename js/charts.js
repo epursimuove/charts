@@ -10,9 +10,9 @@ const nnmCharts = (() => {
 
     console.log('Starting up charts functionality...');
 
-    const version = '1.2.0';
+    const version = '1.3.0'; // Going from Chart.js v2.9.3 to v3.2.0.
 
-    Chart.defaults.global.elements.line.fill = false;
+    Chart.defaults.elements.line.fill = false;
 
     const defaultColors = [
         '225, 0, 0',
@@ -47,6 +47,8 @@ const nnmCharts = (() => {
             dataset.backgroundColor = colors.backgroundColor;
             dataset.borderColor = colors.borderColor;
             dataset.borderWidth = 1;
+
+            dataset.tension = 0.3;
         });
 
     const enhanceSingleDataset = dataset => {
@@ -84,46 +86,54 @@ const nnmCharts = (() => {
 
         const computed = {
             displayLegend: barChartData.datasets.length > 1 || ['line', 'pie', 'bubble'].includes(type),
-            displayScales: ['line', 'horizontalBar', 'bar', 'bubble'].includes(type)
+            displayScales: ['line', 'bar', 'bubble'].includes(type)
         };
 
         const options = {
-            legend: {
-                display: computed.displayLegend
-            },
-            title: {
-                display: title,
-                text: title
+            // maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: computed.displayLegend
+                },
+                title: {
+                    display: title,
+                    text: title
+                }
             }
         };
 
         if (computed.displayScales) {
             options.scales = {
-                xAxes: [{
+                x: {
+                    beginAtZero: true,
                     stacked: extra.stacked,
-                    scaleLabel: {
-                        display: xAxesLabel,
-                        labelString: xAxesLabel
-                    },
-                    ticks: {
-                        beginAtZero: true
+                    title: {
+                        display: true,
+                        text: xAxesLabel
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
+                    beginAtZero: true,
                     stacked: extra.stacked,
-                    scaleLabel: {
-                        display: yAxesLabel,
-                        labelString: yAxesLabel
-                    },
-                    ticks: {
-                        beginAtZero: true
+                    title: {
+                        display: true,
+                        text: yAxesLabel
                     }
-                }]
-            };
+                }
+            }
 
             if (extra.time) {
-                options.scales.xAxes[0].type = 'time';
-                options.scales.yAxes[0].type = 'category';
+                // console.log('datasets', datasets);
+                options.parsing = {
+                    xAxisKey: 't'
+                };
+
+                options.scales.x.type = 'time';
+                options.scales.y.type = 'category';
+            }
+
+            if (extra.horizontal) {
+                options.indexAxis = 'y';
             }
         }
 
@@ -147,7 +157,7 @@ const nnmCharts = (() => {
     return {
         version,
         getNumberOfCharts: () => numberOfCharts,
-        horizontalBarChart: createChart('horizontalBar'),
+        horizontalBarChart: createChart('bar', {horizontal: true}),
         verticalBarChart: createChart('bar'),
         lineChart: createChart('line'),
         timeChart: createChart('line', {time: true}),
