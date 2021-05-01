@@ -10,7 +10,7 @@ const nnmCharts = (() => {
 
     console.log('Starting up charts functionality...');
 
-    const version = '1.3.0'; // Going from Chart.js v2.9.3 to v3.2.0.
+    const version = '1.4.0';
 
     Chart.defaults.elements.line.fill = false;
 
@@ -61,13 +61,8 @@ const nnmCharts = (() => {
     let numberOfCharts = 0;
 
     const createChart = (type, extra = {}) => (configuration) => {
-        const {canvasId, title, xAxesLabel, yAxesLabel, labels, yLabels, datasets, colors, fillViewportFactor} = configuration;
+        const {canvasId, title, xAxesLabel, yAxesLabel, labels, yLabels, datasets, colors} = configuration;
         const context = document.getElementById(canvasId).getContext('2d');
-
-        if (fillViewportFactor > 0 && fillViewportFactor <= 1) {
-            context.canvas.width = window.innerWidth;
-            context.canvas.height = window.innerHeight * fillViewportFactor;
-        }
 
         if (datasets.length === 1) {
             enhanceSingleDataset(datasets[0]);

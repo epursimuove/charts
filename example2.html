@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Proof 2 of concept for chart functionality</title>
+
+    <!-- The Chart.js from https://www.chartjs.org. -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.0/dist/chart.min.js"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.0/dist/chart.js"></script>-->
+
+    <!-- The Luxon date and time library. -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0/build/global/luxon.min.js"></script>
+
+    <!-- The chartjs-adapter-luxon (https://github.com/chartjs/chartjs-adapter-luxon) -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.0.0"></script>
+
+    <script type="text/javascript"
+            src="js/charts.js"></script>
+
+    <script type="text/javascript"
+            src="js/data.js"></script>
+
+    <script type="text/javascript"
+            src="js/structuredData.js"></script>
+
+    <script type="text/javascript"
+            src="js/example.js"></script>
+
+    <style>
+        body {
+            font-family: 'Arial', serif;
+        }
+
+        code {
+            font-family: 'Menlo', monospace;
+            color: saddlebrown;
+        }
+
+        div.chart-examples {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1rem;
+        }
+
+        div.chart-examples div.chart {
+            position: relative;
+            border: 1px dashed green;
+            /*height: 20vw;*/
+            width: 100%;
+            /*padding-bottom: 56.25%;*/
+            padding-bottom: 50%;
+
+        }
+
+        /*div.chart-examples div.chart div.icon {*/
+        /*    position: absolute;*/
+        /*    top: 0;*/
+        /*    right: 0;*/
+        /*    z-index: 1;*/
+        /*    margin: 0.5rem;*/
+        /*    !*background-color: aliceblue;*!*/
+        /*    cursor: pointer;*/
+        /*    font-size: 2rem;*/
+        /*}*/
+
+        canvas {
+            /*min-width: 500px;*/
+            /*width: 1000px;*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+
+            /*border: 1px solid black;*/
+            background-color: lightyellow;
+            width: 100%;
+            height: 100%;
+
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        footer {
+            margin-top: 5em;
+            font-size: 0.9em;
+            color: gray;
+        }
+
+        @media all and (min-width: 1000px) {
+
+            div.chart-examples {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media all and (min-width: 2000px) {
+
+            div.chart-examples {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media all and (min-width: 3000px) {
+
+            div.chart-examples {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media all and (min-width: 4000px) {
+
+            div.chart-examples {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h1>Chart examples 2</h1>
+
+<p>
+    Smaller charts in grid system.
+</p>
+
+<div class="chart-examples">
+
+    <div class="chart">
+<!--        <div class="icon">&times; &updownarrow; &varr;</div>-->
+        <canvas id="dicesChart"></canvas>
+    </div>
+
+    <div class="chart">
+<!--        <div class="icon">&bigotimes; &updownarrow; &varr;</div>-->
+        <canvas id="planetsDiameterChart"></canvas>
+    </div>
+
+    <div class="chart">
+<!--        <div class="icon">&bigotimes; &updownarrow; &varr;</div>-->
+        <canvas id="planetsDistanceChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="countriesAreaChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="countriesPopulationChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="countriesBubbleChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="continentsHighestPointChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="volleyballStackedChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="orienteeringRelativeLegTimesChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="orienteeringRelativeSplitTimesByControlChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="orienteeringRelativeSplitTimesByTimeChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="orienteeringStackedChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="orienteeringGroupedChart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="dices2Chart"></canvas>
+    </div>
+
+    <div class="chart">
+        <canvas id="countriesPopulation2Chart"></canvas>
+    </div>
+
+    <div class="chart">
+
+    </div>
+
+    <div class="chart">
+
+    </div>
+
+</div>
+
+
+
+<footer>
+    <div>
+        <em>NNM Charts</em>
+    </div>
+    <div>
+        First implemented by <a href="https://anders.nemonisimors.com">Anders Gustafson</a>, May 2020.
+    </div>
+    <div>
+        Project home page <a href="https://github.com/epursimuove/charts">https://github.com/epursimuove/charts</a>.
+    </div>
+    <div>
+        <em>Nemo nisi mors</em>
+    </div>
+</footer>
+
+
+</body>
+
+</html>
