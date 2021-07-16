@@ -10,7 +10,7 @@ const nnmCharts = (() => {
 
     console.log('Starting up charts functionality...');
 
-    const version = '1.4.0';
+    const version = '1.5.0';
 
     Chart.defaults.elements.line.fill = false;
 
@@ -125,6 +125,14 @@ const nnmCharts = (() => {
 
                 options.scales.x.type = 'time';
                 options.scales.y.type = 'category';
+
+                options.scales.x.time = {
+                    displayFormats: {
+                        hour: 'HH:mm',
+                        minute: 'HH:mm',
+                        second: 'HH:mm:ss',
+                    }
+                };
             }
 
             if (extra.horizontal) {
