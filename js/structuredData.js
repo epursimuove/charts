@@ -4,12 +4,14 @@
 
 'use strict';
 
+import {data} from "./data.js";
+
 // We depend on Luxon's date and time library, version 1.24.1 or above.
 // const luxon = require('luxon');
 const DateTime = luxon.DateTime;
 const Duration = luxon.Duration;
 
-const structuredData = (() => {
+export const structuredData = (() => {
 
     console.log('Creating structured data sets...');
 

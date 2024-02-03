@@ -43,9 +43,10 @@ You will need to include the `charts.js` file in your HTML `head` section. You w
 <head>
     ...
     <!-- The Chart.js from https://www.chartjs.org. -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
+    <script type="module"
+          src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
 
-    <script type="text/javascript"
+    <script type="module"
             src="js/charts.js"></script>
     ...
 </head>

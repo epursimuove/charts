@@ -4,7 +4,7 @@
 
 'use strict';
 
-const data = (() => {
+export const data = (() => {
 
     console.log('Collecting raw data sets...');
 

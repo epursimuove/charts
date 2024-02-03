@@ -1,5 +1,8 @@
 'use strict';
 
+import {structuredData} from "./structuredData.js";
+import {nnmCharts} from "./charts.js";
+
 const myCharts = (() => {
 
     const initCharts = () => {

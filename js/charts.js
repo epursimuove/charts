@@ -6,11 +6,14 @@
 
 'use strict';
 
-const nnmCharts = (() => {
+export const nnmCharts = (() => {
 
     console.log('Starting up charts functionality...');
 
-    const version = '1.5.0';
+    const version = '2.0.0';
+
+    console.info(`Current charts version ${version}`);
+    console.info(`Using third party ChartJS ${Chart.version}`);
 
     Chart.defaults.elements.line.fill = false;
 
